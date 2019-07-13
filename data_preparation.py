@@ -30,8 +30,7 @@ def data_per_date(data):
 def find_page(data_melted, page_name):
 
     my_page = data_melted[data_melted.Page == page_name]
-    my_page.set_index('Date', inplace=True)
-    my_page = my_page[['count']]
+    my_page = my_page.groupby('Date')[['count']].sum()
     return my_page
 
 
