@@ -4,6 +4,7 @@ from keras.layers import LSTM, Flatten, Dropout
 from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 import pandas
+import matplotlib.pyplot as plt
 
 
 def create_dataset(dataset, look_back=1):
@@ -44,7 +45,7 @@ def invert_scale(scaler, X, value):
     return inverted[0, -1]
 
 
-def fit_lstm(train, units, batch_size, nb_epochs, lookback=2):
+def fit_lstm(train, units, batch_size, nb_epochs, lookback):
     X, y = create_dataset(train, lookback)
     X = np.reshape(X, (X.shape[0], lookback, X.shape[2]))
 
@@ -72,7 +73,7 @@ def fit_lstm(train, units, batch_size, nb_epochs, lookback=2):
     model.compile(loss='mean_squared_error', optimizer='adam')
 
     for i in range(nb_epochs):
-        model.fit(X, y, epochs=1, batch_size=batch_size,  # verbose = 0,
+        model.fit(X, y, epochs=1, batch_size=batch_size,   verbose=0,
                   shuffle=False)
         model.reset_states()
 
@@ -84,3 +85,17 @@ def forecast(model, batch_size, row):
     X = X.reshape(1, 1, len(X))
     yhat = model.predict(X, batch_size=batch_size)
     return yhat[0, 0]
+
+
+def plot_keras(train, test, X_test, predictions, lookback, page_name=None):
+    plt.figure(figsize=(15, 7))
+    titles = ['reality', 'predictions']
+    plt.plot(train.index, train, color='b', linewidth=1.5)
+    plt.plot(test.index[0:len(test)-lookback+1],
+             X_test[0:, 0], label=titles[0], color='b', linewidth=1.5)
+    plt.plot(test.index[0:len(test)-lookback+1],
+             predictions, label=titles[1], color='orange', linewidth=1.5)
+    plt.ylabel('Series')
+    plt.legend(titles)
+    plt.title('Keras prediction ' + page_name)
+    plt.show()
