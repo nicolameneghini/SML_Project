@@ -21,7 +21,7 @@ We compared three different approches to solve this problem:
 All the code, implemented in Python, can be found in the folders. 
 
 ## Contributors 
-* [Gianluca Iacubino] (https://github.com/IacubinoGianluca)
+* [Gianluca Iacubino](https://github.com/IacubinoGianluca)
 * [Nicola Meneghini](https://github.com/nicolameneghini)
-* [Alessia Paoletti] (https://github.com/alessiapaoletti) 
+* [Alessia Paoletti](https://github.com/alessiapaoletti) 
 
