@@ -10,6 +10,7 @@ Each row corresponds to a particular article and each column correspond to a par
 * the Wikipedia project (e.g. en.wikipedia.org)
 * type of access (e.g. desktop) 
 * type of agent (e.g. spider) 
+
 In other words, each article name has the following format: 'name_project_access_agent' (e.g. 'AKB48_zh.wikipedia.org_all-access_spider').
 
 An example of 6 random time series can be seen in the graph below. 
