@@ -8,6 +8,10 @@ The data consists of approximately 145,000 Wikipedia. Each of these time series 
 
 each row corresponds to a particular article and each column correspond to a particular date. Some entries are missing data. The page names contain the Wikipedia project (e.g. en.wikipedia.org), type of access (e.g. desktop) and type of agent (e.g. spider). In other words, each article name has the following format: 'name_project_access_agent' (e.g. 'AKB48_zh.wikipedia.org_all-access_spider').
 
+An example of 6 random time series can be seen in the graph below. 
+![](series.png)
+
+
 ## Approches 
 We compared three different approches to solve this problem: 
 * ARIMA model
