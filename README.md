@@ -14,9 +14,9 @@ An example of 6 random time series can be seen in the graph below.
 
 ## Approches 
 We compared three different approches to solve this problem: 
-* ARIMA model
-* LSTM
-* Wavenet 
+* [ARIMA model](https://github.com/alessiapaoletti/SML_Project/tree/master/ARIMA)
+* [LSTM](https://github.com/alessiapaoletti/SML_Project/tree/master/LSTM)
+* [Wavenet](https://github.com/alessiapaoletti/SML_Project/tree/master/Wavenet)
 
 All the code, implemented in Python, can be found in the folders. 
 
