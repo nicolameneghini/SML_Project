@@ -87,6 +87,10 @@ def forecast(model, batch_size, row):
     return yhat[0, 0]
 
 
+def smape(A, F):
+    return 100/len(A) * np.sum(2 * np.abs(F - A) / (np.abs(A) + np.abs(F)))
+
+
 def plot_keras(train, test, X_test, predictions, lookback, page_name=None):
     plt.figure(figsize=(15, 7))
     titles = ['reality', 'predictions']
