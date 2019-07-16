@@ -61,16 +61,18 @@ def divide_page_by_lang(data_melted, page_name):
 def plot_random_series(data_melted, n_series=5):
 
     titles = list()
-    pages = []
+    pages = {}
     np.random.seed(1)
 
     for i in range(n_series):
-        titles.append(data_melted['Page'][np.random.randint(0, len(data))])
-        page[i] = find_page(data_melted, titles[i])
+        titles.append(data_melted['Page']
+                      [np.random.randint(0, len(data_melted))])
 
     sns.set()
+    plt.figure(figsize=(14, 7))
     for i in range(n_series):
-        plt.figure(figsize=(14, 7))
-        plt.plot(page[i], linewidth=1.7)
-        plt.label(titles)
-        plt.show()
+        pages[i] = find_page(data_melted, titles[i])
+        plt.plot(pages[i], linewidth=1.7, label=titles[i])
+
+    plt.legend()
+    plt.show()

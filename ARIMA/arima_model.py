@@ -32,7 +32,7 @@ def rolling_forecast(train, test, model_name, p, d, q):
         model = model_name(history, order=(p, d, q))
         model_fit = model.fit(disp=0)
         output = model_fit.forecast()
-        yhat = output[0]
+        yhat = output[0][0]
         predictions.append(yhat)
         obs = test[t]
         history.append(obs)
@@ -52,6 +52,10 @@ def rolling_forecast_var(train, test, model_name, p, q):
         history = history.append(obs)
 
     return predictions
+
+
+def smape(A, F):
+    return 100/len(A) * np.sum(2 * np.abs(F - A) / (np.abs(A) + np.abs(F)))
 
 
 def plot_arima(train, test, predictions):
