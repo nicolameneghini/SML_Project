@@ -12,22 +12,34 @@ def find_language(url):
     return 'na'
 
 
-def extract_series(df, row_num, start_idx):
-    y = df.iloc[row_num, start_idx:]
-    df = pd.DataFrame({'date': y.index, 'count': y.values})
-    return df
+def extract_series(data, n_of_series):
+    pages = {}
+    titles = {}
+    index = pd.to_datetime(data.columns[1:])
+    for i in range(n_of_series):
+        temp = (data[i:i+1].values[0][1:]).astype(None)
+        titles[i] = data[i:i+1].values[0][0]
+        if (np.isfinite(np.mean(temp))):
+            pages[i] = pd.DataFrame(temp)
+            pages[i].fillna(int(pages[i].mean()), inplace=True)
+            pages[i].set_index(index)
+            pages[i].index.name = 'Date'
+            pages[i].columns = ['count']
+
+    return pages, titles
 
 
 def data_per_date(data):
 
-    temp = data.Page.str.rsplit("_", expand=True, n=3)
+    data1 = data.copy()
+    temp = data1.Page.str.rsplit("_", expand=True, n=3)
 
-    data['lang'] = data.Page.map(find_language)
-    data['Page'] = temp[0]
-    data['Type_of_traffic'] = temp[2]
-    data['Agent'] = temp[3]
+    data1['lang'] = data1.Page.map(find_language)
+    data1['Page'] = temp[0]
+    data1['Type_of_traffic'] = temp[2]
+    data1['Agent'] = temp[3]
 
-    data_melted = pd.melt(data, id_vars=['Page', 'Type_of_traffic', 'Agent', 'lang'],
+    data_melted = pd.melt(data1, id_vars=['Page', 'Type_of_traffic', 'Agent', 'lang'],
                           var_name='Date', value_name='count')
     data_melted['Date'] = data_melted['Date'].astype('datetime64[ns]')
 
